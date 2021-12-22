@@ -18,6 +18,9 @@ fn main(){
     let data:Vec<_>=(0..nside2npix(nside)).map(|i|(i%2) as f64).collect();
 
     //write to a fits file
+    //There can be 1, 2, 3, or 6 columns in one hdu
+    //multiple columns are arranged in &[&[T]], which is the second argument
+    //The function of other areguments are self-explained.
     write_map("a.fits", &[&data], false, true);
 
     //read it back, here we read only the "TEMPERATURE" column (which is the only column)
