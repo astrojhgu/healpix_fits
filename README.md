@@ -3,7 +3,7 @@
 Usage: check [src/main.rs](src/main.rs)
 
 ## Example
-```
+```RUST
 extern crate healpix_fits;
 
 use healpix_fits::{
