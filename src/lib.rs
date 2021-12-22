@@ -1,20 +1,33 @@
-use scorus::{
-    healpix::{
-        utils::{
-            npix2nside
-        }
-    }
-};
 use fitsio::{
     FitsFile
     , tables::{
         ColumnDescription
-        //, ColumnDataDescription
         , ColumnDataType
         , WritesCol
         , ReadsCol
     }
 };
+
+pub fn isqrt(x: usize) -> usize
+{
+    (x as f64 + 0.5).sqrt() as usize
+}
+
+pub fn nside2npix(nside: usize)->usize{
+    nside.pow(2)*12
+}
+
+pub fn npix2nside(npix: usize) -> usize {
+    let res = isqrt(npix / 12);
+    if nside2npix(res) == npix {
+        res
+    } else {
+        panic!()
+    }
+}
+
+
+
 
 pub fn standard_column_names(n: usize)->Vec<String>{
     match n{

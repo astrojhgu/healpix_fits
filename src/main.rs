@@ -1,13 +1,9 @@
 extern crate healpix_fits;
-use scorus::{
-    healpix::{
-        utils::nside2npix
-    }
-};
 
 use healpix_fits::{
     write_map
     , read_map
+    , nside2npix
 };
 
 fn main(){
