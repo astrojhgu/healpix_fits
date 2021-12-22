@@ -8,7 +8,6 @@ use healpix_fits::{
 
 fn main(){
     let nside=128;
-    //let data=vec![0.0; nside2npix(nside)];
     let data:Vec<_>=(0..nside2npix(nside)).map(|i|(i%2) as f64).collect();
     write_map("a.fits", &[&data], false, true);
     let data1=read_map::<f64>("a.fits", &["TEMPERATURE"], 1);
