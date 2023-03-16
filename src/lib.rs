@@ -5,7 +5,7 @@ use fitsio::{
         , ColumnDataType
         , WritesCol
         , ReadsCol
-    }
+    }, hdu::FitsHdu
 };
 
 pub fn isqrt(x: usize) -> usize
@@ -62,7 +62,7 @@ pub fn write_map<T>
     map_data: &[&[T]],
     nest: bool,
     overwrite: bool
-)
+)->FitsHdu
 where T:AllowedColumnDataType
 {
     let nside=npix2nside(map_data[0].len());
@@ -85,7 +85,8 @@ where T:AllowedColumnDataType
     hdu.write_key(&mut fitsfile, "ORDERING", if nest {"NESTED"} else {"RING"}).unwrap();
     hdu.write_key(&mut fitsfile, "NSIDE", nside as i32).unwrap();
     hdu.write_key(&mut fitsfile, "INDXSCHM", "IMPLICIT").unwrap();
-    hdu.write_key(&mut fitsfile, "OBJECT", "FULLSKY").unwrap();    
+    hdu.write_key(&mut fitsfile, "OBJECT", "FULLSKY").unwrap();
+    hdu 
 }
 
 pub fn read_map<T>(
