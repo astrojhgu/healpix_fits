@@ -62,7 +62,7 @@ pub fn write_map<T>
     map_data: &[&[T]],
     nest: bool,
     overwrite: bool
-)->FitsHdu
+)->(FitsFile, FitsHdu)
 where T:AllowedColumnDataType
 {
     let nside=npix2nside(map_data[0].len());
@@ -86,7 +86,7 @@ where T:AllowedColumnDataType
     hdu.write_key(&mut fitsfile, "NSIDE", nside as i32).unwrap();
     hdu.write_key(&mut fitsfile, "INDXSCHM", "IMPLICIT").unwrap();
     hdu.write_key(&mut fitsfile, "OBJECT", "FULLSKY").unwrap();
-    hdu 
+    (fitsfile, hdu)
 }
 
 pub fn read_map<T>(
